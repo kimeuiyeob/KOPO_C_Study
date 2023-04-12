@@ -1,5 +1,12 @@
 #include <stdio.h>
 #include <string.h>
+//¾²·¹µå 
+#include <Windows.h>
+#include <process.h>
+//¼Ò¸®
+#define DO 1046.402
+#define LE 1108.731 
+#define ME 1318.510
 
 int main() {
 	
@@ -36,14 +43,25 @@ int main() {
             }
         }
         if (count == 1) {
-            printf("Â¦! ");
+        	//0.5ÃÊ°£ Àç¿î´Ù.
+        	//¼Ò¸®Ãâ·Â 
+        	Beep(DO,500);
+            printf("Â¦!\n");
         } else if (count == 2) {
-            printf("Â¦Â¦! ");
+        	Beep(DO,500);
+        	Beep(LE,500);
+            printf("Â¦Â¦!\n");
         } else if (count == 3) {
-            printf("Â¦Â¦Â¦! ");
+        	Beep(DO,500);
+        	Beep(LE,500);
+        	Beep(ME,500);
+            printf("Â¦Â¦Â¦!\n");
         } else {
-            printf("%d ", i);
+        	//sleep ¼Ò¹®ÀÚ s´Â ¹Ð¸®¼¼ÄÁµå°¡ ¾Æ´Ï´Ù. 
+        	Sleep(500);
+            printf("%d\n", i);
         }
     }
     return 0;
 }
+

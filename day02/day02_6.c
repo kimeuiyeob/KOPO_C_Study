@@ -2,8 +2,8 @@
 
 
 //윤달 확인 함수 
-int isYoonDal(int a) {
-    if ((a % 4 == 0) && !(a % 100 == 0) || (a % 400 == 0)) {
+int isYoonDal(int year) {
+    if ((year % 4 == 0) && !(year % 100 == 0) || (year % 400 == 0)) {
         return 1;
     }
     else {
@@ -13,8 +13,8 @@ int isYoonDal(int a) {
 
 int main() {
 	
-    int year; // 사용자 입력 <== 년도 받아오기 
-    int month; // 사용자 입력 <== 월 받아오기 
+    int year; // <== 년도 받아오기 
+    int month; // <== 월 받아오기 
     int weekDay; // 저장용 변수
     int sum = 0; // 현재의 모든 일 계산 변수
     
@@ -40,6 +40,7 @@ int main() {
 			sum += 365;
 		} 
     }
+    
     //월요일부터 시작이여서 하루추가 
     sum += 1;
  
@@ -48,9 +49,10 @@ int main() {
         sum += basicyear[i];
     }
  
-    //1월1일 무슨 요일인지 계산
+    //무슨 요일인지 계산
     weekDay = sum % 7;
  
+ 	//헤더 출력 
     printf("==================== %d년 %d월====================\n",year,month);
     printf("일\t월\t화\t수\t목\t금\t토\n");
  
@@ -60,6 +62,7 @@ int main() {
         printf("\t");
     }
  
+ 	//날짜 출력 
     for (i = 1 ; i <= basicyear[month - 1] ; i++) {
         printf("%d\t", i);
         if (weekDay == 6) {
@@ -69,6 +72,7 @@ int main() {
         weekDay++;
     }
     printf("\n");
+    
 }
 
 
