@@ -18,10 +18,4 @@ int main() {
 	printf("%s\n",firstArr);
 	printf("%d\n",strlen(firstArr));
 	
-	
-//	int i;
-//	for(i=0; i < strlen(totalArr); i++) {
-//		
-//	}
-	
 }

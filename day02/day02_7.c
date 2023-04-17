@@ -4,7 +4,100 @@
 #include <stdlib.h> 
 #include <time.h> 
 
+//=================================
+//권종별 가격 
+const int BABY_PRICE = 0;
 
+const int ADULT_DAY_PRICE = 56000;
+const int ADULT_NIGHT_PRICE = 46000;
+
+const int TEEN_DAY_PRICE = 47000;
+const int TEEN_NIGHT_PRICE = 40000;
+
+const int CHILD_DAY_PRICE = 44000;
+const int CHILD_NIGHT_PRICE = 37000;
+
+const int OLD_DAY_PRICE = 44000;
+const int OLD_NIGHT_PRICE = 37000;
+
+//=================================
+//주민등록번호 분석
+const long long int FULL_DIGIT = 10000000000000,
+const long long int	FULL_DIGIT_MIN = 10000000000, 
+const long long int	SEVEN_DIGIT = 1000000;
+
+const int TWO_DIGIT = 100, ONE_DIGIT = 10;
+const int OLD_GENERATION = 1900, NEW_GENERATION = 2000;
+const int MALE_OLD = 1, FEMALE_OLD = 2; 
+const int MALE_NEW = 3, FEMALE_NEW = 4;
+const int BEFORE_BIRTH = 2, AFTER_BIRTH = 1;
+ 
+//=================================
+//나이에 따른 범위
+const int MIN_BABY = 1;
+ 
+const int MIN_CHILD = 3; 
+const int MIN_TEEN = 13; 
+const int MIN_ADULT = 19;
+ 
+const int MAX_CHILD = 12; 
+const int MAX_TEEN = 18; 
+const int MAX_ADULT = 64;
+ 
+//=================================
+//나이에 따른 그룹
+const int BABY = 1, CHILD = 2, TEEN = 3, ADULT = 4, OLD = 5;
+
+//=================================
+//할인율
+const float DISABLE_DISCOUNT_RATE = 0.6;
+const float MERIT_DISCOUNT_RATE = 0.5;
+const float	MULTICHILD_DISCOUNT_RATE = 0.8;
+const float PREGNANT_DISCOUNT_RATE = 0.85;
+
+//=================================
+//최대주문량
+const int MAX_COUNT = 10, MIN_COUNT = 1;
+ 
+//======================================================================================================
+//기본 함수 정의 
+
+void errorMessagePrint(); //오류 메세지 출력 
+
+int inputTicketSelect(); //
+
+long long int inputCustomerIDNumber();
+
+int inputOrderCount();
+
+int inputDiscountSelect();
+
+void inputData(int* ticketSelect, long long int* customerIDNumber,int* orderCount, int* discountSelect);
+
+int calcAge(long long int customerIDNumber);
+
+int calcAgeGroup(int age);
+
+int calcPriceProcess(int age, int ticketSelect);
+
+int calcDiscount(int calcPrice, int discountSelect);
+
+int calcPriceResult(int calcPrice, int orderCount);
+
+int processIntergration(long long int customerIDNumber, int ticketSelect, int discountSelect, int orderCount, int priceResult, int *age);
+
+void saveOrderList(int ticketSelect, int age, int orderCount, int priceResult, int discountSelect, int *position, int(*orderList)[5]);
+
+void pricePrint(int priceResult);
+
+void orderPrint(int totalPrice, int* position, int(*orderList)[5]);
+
+void orderFilePrint(int totalPrice, int* position, int(*orderList)[5], int* filePosition);
+
+int orderContinue();
+
+
+//======================================================================================================  
 //주간권 야간권 선택 
 int isDayOrNight() {	
 	int k = 0;
@@ -135,6 +228,7 @@ float forSale() {
 	int forWeekPerson;
 	float sale;
 	
+	float bodyGood = 1.0;
 	float bodySick = 0.4;
 	float saveCountry = 0.5;
 	float Manybaby = 0.2;
@@ -154,7 +248,7 @@ float forSale() {
 		
 		if(forWeekPerson == 1) {
 			printf("1번 선택하셨습니다.\n");
-			sale = sale;
+			sale = bodyGood;
 			break;
 		}else if(forWeekPerson == 2) {
 			printf("2번 선택하셨습니다.\n");
@@ -181,17 +275,105 @@ float forSale() {
 
 int main() {
 	
-//	==========================================
-   int dayOrNight = isDayOrNight(); //주간인지 야간인지 
-   int age = myAge(); //나이 
-   int tickets =  howManyTickets(); //티켓 구매수 
-   int totalPrice = whatsTotalPrice(dayOrNight,age,tickets);
-   float sale = forSale();
-   
-   int finalPrice = totalPrice * sale;
+    char* DayNightTicket[100];
+    char* Person[100];
+    int Tickets[100];
+    int Money[100];
+    char* GiveHandi[100];
+    
+//    ===================
+
+    int dayOrNightCnt = 0;
+    int ageCnt = 0;
+    int TicketsCnt = 0; 
+    int MoneyCnt = 0;
+    int GiveHandiCnt = 0;
+    
+    while(1) {
+    	
+    	printf("계속 발권 하시겠습니까?\n");
+    	printf("1. 티켓발권\n");
+    	printf("2. 티켓종료\n");
+    	int chooseNum; 
+    	scanf("%d",&chooseNum);
+    	if(chooseNum == 1) {
+		
+			int dayOrNight = isDayOrNight(); //주간인지 야간인지 
+			if(dayOrNight == 1) {
+				DayNightTicket[dayOrNightCnt] = "주간권";
+				dayOrNightCnt++;
+			}else if(dayOrNight == 2) {
+				DayNightTicket[dayOrNightCnt] = "야간권";
+				dayOrNightCnt++;
+			}
+//			==========================================================
+			int age = myAge(); //나이 
+			if(age >= 19 && age <= 64) {
+				Person[ageCnt] = "대인";
+				ageCnt++;
+			}else if(age >= 13 && age <= 18) {
+				Person[ageCnt] = "청소년";
+				ageCnt++;
+			}else if(age >= 3 && age <= 12) {	
+				Person[ageCnt] = "소인";
+				ageCnt++;
+			}else if(age >= 65) {
+				Person[ageCnt] = "경로";
+				ageCnt++;
+			}
+//			==========================================================
+			int tickets =  howManyTickets(); //티켓 구매수
+			Tickets[TicketsCnt] = tickets;
+			TicketsCnt++;
+//			==========================================================
+    		int totalPrice = whatsTotalPrice(dayOrNight,age,tickets);
+			Money[MoneyCnt] = totalPrice;
+			MoneyCnt++;
+//			==========================================================
+
+    		float sale = forSale();
+    		printf("확인 : %f\n",sale);
+    		
+    		if(sale == 1.0) {
+    			GiveHandi[GiveHandiCnt] = "우대적용 없음";
+    			GiveHandiCnt++;
+			}else if(sale == 0.4f) {
+				GiveHandi[GiveHandiCnt] = "장애인 우대적용";
+    			GiveHandiCnt++;
+			}else if(sale == 0.5f) {
+				GiveHandi[GiveHandiCnt] = "국가 유공자 우대적용";
+    			GiveHandiCnt++;
+			}else if(sale == 0.2f) {
+				GiveHandi[GiveHandiCnt] = "다자녀 우대적용";
+    			GiveHandiCnt++;
+			}else if(sale == 0.15f) {
+				GiveHandi[GiveHandiCnt] = "임산부 우대적용";
+    			GiveHandiCnt++;
+			}
+//			==========================================================
+		}else if(chooseNum == 2) {
+			
+			printf("티켓 발권을 종료합니다. 감사합니다.\n");
+			printf("=======================================================================\n");
+			
+			int i;
+			for(i = 0; i < ageCnt; i++) {
+			printf("%s\t%s\tX\t%d\t%d원\t%s\n", DayNightTicket[i],Person[i],Tickets[i],Money[i],GiveHandi[i]);
+			}
+			int totalPrice = 0; 
+			for(i = 0; i < ageCnt; i++) {
+				totalPrice += Money[i];
+			}
+			printf("입장료 총액은 %d원 입니다.\n",totalPrice);
+			printf("=======================================================================\n");
+			break;
+		}else {
+			printf("1번~2번중 선택해주세요.");
+		}
+    	
+	}
 	
-	printf("가격은 %d 원 입니다.\n",finalPrice); 
-	printf("감사합니다.\n"); 
+	return 0;
 	
 } 
 
