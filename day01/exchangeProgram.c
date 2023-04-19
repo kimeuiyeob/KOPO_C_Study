@@ -47,6 +47,8 @@ int main() {
 			printf("환전 결과\n");
 			int dollar = (int)(exChangeMoney / USDrate);
 			printf("USD : %d 달러\n", dollar);
+			
+			
 			int change = (int)(exChangeMoney - dollar * USDrate);
 			printf("거스름돈 : %d 원입니다.\n", change -change%10);
 			

@@ -43,7 +43,47 @@ int tickersArr[100]; //구매한 티켓수
 int totalPriceArr[100]; //마지막 결과금액 
 char* benefitArr[100]; //우대사항 
 int count = 0;
-
+//==================================================================================================================================
+//함수들 정의 
+int inputTicketSelect();
+int inputOrderCount();
+int inputDiscountSelect();
+int calcAge();
+int numberAdultOrChild();
+int calcPriceProcess();
+int calcDiscount();
+int calcPriceResult();
+int resultTotalPrice();
+void saveOrderList();
+void printResult();
+int keepBuyTickets();
+//==================================================================================================================================
+//메인 함수 
+int main() {
+    int totalPrice = 0; // 주문 총액
+    while(1) {
+    	int choiceNumber = keepBuyTickets(); //처음 안내문구 계속살지 안살지! 
+    	if(choiceNumber == 2) {
+			printResult();
+			break;
+		}
+    	int dayOrNight = inputTicketSelect(); //야간인지 주간인지 표 선택 (1:주간, 2:야간) 
+    	int age = calcAge(); //만나이
+    	int buyHowManyTickets = inputOrderCount(); //구매한 티켓수 (티켓 총 개수)
+		int benefitNumber = inputDiscountSelect();//우대사항 선택(1:없음, 2:장애인, 3:국가유공자, 4:다자녀, 5:임산부)
+		
+		int	getNumberAdultOrChild = numberAdultOrChild(age); //어른,청소년,어린이,애기,노인  
+		
+		
+   		int moneyWithDayOrNightAge = calcPriceProcess(age,dayOrNight); //주간,야간 및 연령에 따른 가격표
+		int moneyDiscount = calcDiscount(moneyWithDayOrNightAge,benefitNumber); //우대사항 가격 할인 
+		int totalPrice = resultTotalPrice(moneyDiscount,buyHowManyTickets); //최종 가격
+		
+		saveOrderList(dayOrNight,getNumberAdultOrChild,buyHowManyTickets,totalPrice,benefitNumber,count); //주간권,청소년,티켓수량,최종가격,우대사항 데이터 저장 
+		count++;
+	} 
+   return 0;
+}
 //==================================================================================================================================
 //구매 티켓 주간인지 야간인지 
 int inputTicketSelect() {
@@ -67,7 +107,6 @@ int inputTicketSelect() {
    }   
    return morningNight;
 };
-
 //==================================================================================================================================
 //구매한 티켓수 
 int inputOrderCount() {
@@ -76,14 +115,14 @@ int inputOrderCount() {
       printf("티켓을 몇개 주문하시겠습니까?\n");
       printf("최소 1개 , 최대 10개 까지 구매 가능합니다.\n");
       scanf("%d",&buyHowManyTicket);
-      if(buyHowManyTicket > MAX_COUNT && buyHowManyTicket < MIN_COUNT) {
+      if(buyHowManyTicket < MIN_COUNT || buyHowManyTicket > MAX_COUNT) {
+      	printf("티켓은 1매 ~ 10매까지 구매가능합니다.\n");
          continue;
       }
       break; 
    }
    return buyHowManyTicket;
 };
-
 //==================================================================================================================================
 //우대사항 선택 
 int inputDiscountSelect() {
@@ -97,7 +136,6 @@ int inputDiscountSelect() {
       printf("4. 다자녀\n");
       printf("5. 임산부\n");
       scanf("%d",&forWeekPerson);
-      
       if(forWeekPerson == 1) {
          printf("1번 선택하셨습니다.\n");
          sale = 1;
@@ -124,7 +162,6 @@ int inputDiscountSelect() {
    }
    return sale;
 };
-
 //==================================================================================================================================
 //만나이 계산 
 int calcAge() {
@@ -162,7 +199,6 @@ int calcAge() {
    }  
    return age;
 };
-
 //==================================================================================================================================
 //나이로 어른,청소년 숫자 구분
 int numberAdultOrChild(int age) {
@@ -180,7 +216,6 @@ int numberAdultOrChild(int age) {
     }
 	return number;	
 };
-
 //==================================================================================================================================
 //연령에 따른 티켓 가격 함수 
 int calcPriceProcess(int age, int ticketSelect) {
@@ -213,7 +248,6 @@ int calcPriceProcess(int age, int ticketSelect) {
    }
    return calcPrice;
 };
-
 //==================================================================================================================================
 //우대사항 가격으로 할인율 계산 
 int calcDiscount(int calcPrice, int discountSelect) {
@@ -231,7 +265,6 @@ int calcDiscount(int calcPrice, int discountSelect) {
    }
    return discountPrice;
 };
-
 //==================================================================================================================================
 //결과 나온 가격으로 티켓 구매갯수 계산 
 int calcPriceResult(int calcPrice, int orderCount) {
@@ -239,20 +272,17 @@ int calcPriceResult(int calcPrice, int orderCount) {
    totalPrice = calcPrice * orderCount;
    return totalPrice;
 };
-
 //==================================================================================================================================
 //결과 금액 
 int resultTotalPrice(int priceResult, int tickets) {
 	int totalPrice = priceResult * tickets;
 	return totalPrice;
 };
-
 //==================================================================================================================================
 //주문내역 저장
 void saveOrderList(int dayOrNight,int getNumberAdultOrChild,int buyHowManyTickets,int totalPrice,int benefitNumber,int count) {
 	
 	if(dayOrNight == 1) {
-		printf("카운트 : %d",count);
 		dayOfNightArr[count] = "주간권";
 	}else if(dayOrNight == 2) {
 		dayOfNightArr[count] = "야간권";
@@ -286,7 +316,6 @@ void saveOrderList(int dayOrNight,int getNumberAdultOrChild,int buyHowManyTicket
 		benefitArr[count] = "임산부 우대사항 적용";
 	}
 };
-
 //==================================================================================================================================
 //출력 
 void printResult() {
@@ -303,7 +332,6 @@ void printResult() {
 		printf("====================================================================\n");
 	}
 }
-
 //==================================================================================================================================
 //계속 발권하시겠습니까? 안내문구
 int keepBuyTickets() {
@@ -314,33 +342,3 @@ int keepBuyTickets() {
 	scanf("%d",&chooseNumber);
 	return chooseNumber;
 }
-
-//==================================================================================================================================
-int main() {
-	
-    int totalPrice = 0; // 주문 총액
-    while(1) {
-    	
-    	int choiceNumber = keepBuyTickets(); //처음 안내문구 계속살지 안살지! 
-    	if(choiceNumber == 2) {
-			printResult();
-			break;
-		}
-		
-    	int dayOrNight = inputTicketSelect(); //야간인지 주간인지 표 선택 (1:주간, 2:야간) 
-    	int age = calcAge(); //만나이
-    	int buyHowManyTickets = inputOrderCount(); //구매한 티켓수 (티켓 총 개수)
-		int benefitNumber = inputDiscountSelect();//우대사항 선택(1:없음, 2:장애인, 3:국가유공자, 4:다자녀, 5:임산부)
-		int	getNumberAdultOrChild = numberAdultOrChild(age); //어른,청소년,어린이,애기,노인  
-   		int moneyWithDayOrNightAge = calcPriceProcess(age,dayOrNight); //주간,야간 및 연령에 따른 가격표
-		int moneyDiscount = calcDiscount(moneyWithDayOrNightAge,benefitNumber); //우대사항 가격 할인 
-		int totalPrice = resultTotalPrice(moneyDiscount,buyHowManyTickets); //최종 가격
-		
-		saveOrderList(dayOrNight,getNumberAdultOrChild,buyHowManyTickets,totalPrice,benefitNumber,count); //주간권,청소년,티켓수량,최종가격,우대사항 데이터 저장 
-		count++;
-	} 
-	
-   return 0;
-}
-
-
