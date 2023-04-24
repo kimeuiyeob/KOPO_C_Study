@@ -1,5 +1,6 @@
 package EuiYeobLandCSV;
 
+//상수 모음 클래스
 public class ConstValClass {
 	// ====================================================
 	// 연령별 가격

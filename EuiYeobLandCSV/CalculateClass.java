@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+//모든 연산 관련 클래스
 public class CalculateClass {
 
 	private static List<OrderListClass> orderClassList = new ArrayList<>();
@@ -48,6 +49,8 @@ public class CalculateClass {
 		return age;
 	}
 
+//	===================================================================================
+	// 날짜 계산
 	public String getDate() {
 
 		LocalDate today = LocalDate.now();
@@ -105,6 +108,7 @@ public class CalculateClass {
 		}
 		return calcPrice;
 	};
+
 //		==========================================================================
 	// 우대사항 가격으로 할인율 계산
 

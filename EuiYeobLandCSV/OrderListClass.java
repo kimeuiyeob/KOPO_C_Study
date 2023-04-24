@@ -2,12 +2,12 @@ package EuiYeobLandCSV;
 
 public class OrderListClass {
 
-	private String dayOrNight;
-	private String adultOrChild;
-	private int howManyTickets;
-	private int totalPrice;
-	private String benefitNumber;
-	private String date;
+	private String dayOrNight; // 주간인지 야간인지
+	private String adultOrChild; // 성인인지 청소년인지 등등
+	private int howManyTickets; // 티켓 구매 수
+	private int totalPrice; // 총 가격
+	private String benefitNumber; // 우대 선택
+	private String date; // 날짜
 
 	public OrderListClass(String dayOrNight, String adultOrChild, int howManyTickets, int totalPrice,
 			String benefitNumber, String date) {
@@ -67,6 +67,5 @@ public class OrderListClass {
 	public void setDate(String date) {
 		this.date = date;
 	}
-
 
 }

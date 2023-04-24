@@ -31,7 +31,7 @@ public class OrderListSaveClass {
 	File file = null;
 	BufferedWriter bw = null;
 
-	// 파일 저장
+	// CSV 파일 저장
 	public void orderListSaving() {
 		file = new File(filePath);
 
@@ -61,8 +61,8 @@ public class OrderListSaveClass {
 		}
 	}
 
-	// 파일 읽기
-	public List<List<String>> orderListReading() {
+	// CSV 파일 읽고 LIST에 저장
+	public void orderListReading() {
 
 		File csv = new File("C:/Users/euiyeob/Desktop/csvFile/practice.csv");
 		BufferedReader br = null;
@@ -90,6 +90,6 @@ public class OrderListSaveClass {
 			}
 		}
 
-		return null;
+		
 	}
 }

@@ -1,5 +1,6 @@
 package EuiYeobLandCSV;
 
+//티켓 구매 프로그램 클래스
 public class EuiYeobLandClass {
 
 	private CalculateClass calculateClass = null; // 연산 클래스
@@ -15,6 +16,7 @@ public class EuiYeobLandClass {
 
 	}
 
+	// 티켓 구매 메서드
 	public void startBuyTickets() {
 
 		try {
@@ -25,6 +27,7 @@ public class EuiYeobLandClass {
 
 		while (true) {
 
+			// 티켓 구매 실행
 			int dayOrNight = inputClass.ticketDayorNight(); // 주간권1 / 야간권2
 			String[] residentNumber = inputClass.inputResidentNumber(); // 주민등록번호
 			int age = calculateClass.getAge(residentNumber[0], residentNumber[1]); // 만나이 계산
@@ -36,7 +39,7 @@ public class EuiYeobLandClass {
 			String date = calculateClass.getDate(); // 오늘 날짜
 			calculateClass.saveOrderList(dayOrNight, age, buyHowManyTickets, totalPrice, selectDiscount, date); // 주간권,청소년,티켓수량,최종가격,우대사항
 
-			int keeyBuyOrNot = inputClass.keepBuyTicket();
+			int keeyBuyOrNot = inputClass.keepBuyTicket(); // 1번일때 계속구매, 2번일때 BREAK
 			if (keeyBuyOrNot == 2) {
 				try {
 					outputClass.printResult();
@@ -46,10 +49,11 @@ public class EuiYeobLandClass {
 				break;
 			}
 		}
-		//CSV 
-		orderListSaveClass.orderListReading(); 
-		outputClass.getTotalCSVReport(); //전체 출력
-		outputClass.getDayOrNightTotalTickets(); //주간,야간 권종별 판매현황
-		outputClass.getReportBenifitStatus(); //총 우대별 구매티켓 개수
+
+		// CSV 관련
+		orderListSaveClass.orderListReading(); // CSV 읽어와서 저장
+		outputClass.getTotalCSVReport(); // 전체 출력
+		outputClass.getDayOrNightTotalTickets(); // 주간,야간 권종별 판매현황
+		outputClass.getReportBenifitStatus(); // 총 우대별 구매티켓 개수
 	}
 }

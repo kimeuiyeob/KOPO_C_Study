@@ -51,7 +51,7 @@ public class OutputClass extends Thread {
 			String[] textArr = { "행복한시간 보내세요~", "오늘도 활기한 하루!", "사랑합니다 의엽랜드~", "울라랄라랄라라라~~", "재밌고 신나는 의엽랜드 환영합니다~" };
 			System.out.println("\t\t\t" + textArr[number]);
 
-			// csv저장
+			// CSV저장
 			orderListSaveClass.orderListSaving();
 			// ======================================================================================================
 
@@ -94,7 +94,7 @@ public class OutputClass extends Thread {
 			System.out.print(orderListSaveClass.getCsvList().get(i).get(1) + "\t"); // 권종
 			System.out.print(orderListSaveClass.getCsvList().get(i).get(2) + "\t"); // 연령구분
 			System.out.print(orderListSaveClass.getCsvList().get(i).get(3) + "\t"); // 수량
-			System.out.print(orderListSaveClass.getCsvList().get(i).get(4) + "\t\t"); // 가격
+			System.out.print(df.format(Integer.valueOf(orderListSaveClass.getCsvList().get(i).get(4))) + "\t\t"); // 가격
 			System.out.print(orderListSaveClass.getCsvList().get(i).get(5)); // 우대사항
 			System.out.println();
 		}
@@ -107,13 +107,14 @@ public class OutputClass extends Thread {
 		System.out.println("================================권종별 판매 현항================================");
 		getReportDayTickets();// 주간 티켓 구매율
 		System.out.println();
-		getReportNightTickets();
+		getReportNightTickets(); // 야간 티켓 구매율
 		System.out.println("============================================================================");
 	}
 
 //	===================================================================================
 	// 주간권 티켓 구매율
 	public void getReportDayTickets() {
+
 		OrderListSaveClass orderListSaveClass = new OrderListSaveClass();
 
 		int countDayTickets = 0;
@@ -157,6 +158,7 @@ public class OutputClass extends Thread {
 //	===================================================================================
 	// 야간권 티켓 구매율
 	public void getReportNightTickets() {
+
 		OrderListSaveClass orderListSaveClass = new OrderListSaveClass();
 		int countDayTickets = 0;
 		int baby = 0; // 아이
