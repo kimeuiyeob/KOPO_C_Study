@@ -1,4 +1,4 @@
-package EuiYeobLand;
+package EuiYeobLandLocale;
 
 //상수 모음 클래스
 public class ConstValClass {

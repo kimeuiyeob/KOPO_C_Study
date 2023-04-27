@@ -116,6 +116,12 @@ public class TextClass {
 		System.out.println(TanslateClass.forPregnant);
 	}
 
+	public void chooseLan() {
+		System.out.println("Choose your language");
+		System.out.println("1. 한국어");
+		System.out.println("2. English");
+	}
+
 	public void printEuiYeobLandReport() {
 		System.out.println("================================ 의엽랜드 보고서 ===============================");
 		System.out.println("날짜\t\t권종\t연령구분\t수량\t가격\t\t우대사항");

@@ -1,4 +1,4 @@
-package EuiYeobLand;
+package EuiYeobLandLocale;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -77,6 +77,24 @@ public class CalculateClass {
 	}
 
 //		==========================================================================
+	public int returnAgeNumber(int age) {
+
+		if (age >= ConstValClass.MIN_ADULT && age <= ConstValClass.MAX_ADULT) {
+			return 1;
+		} else if (age >= ConstValClass.MIN_TEEN && age <= ConstValClass.MAX_TEEN) {
+			return 2;
+		} else if (age >= ConstValClass.MIN_CHILD && age <= ConstValClass.MAX_CHILD) {
+			return 3;
+		} else if (age >= ConstValClass.MAX_ADULT) {
+			return 4;
+		} else if (age == ConstValClass.MIN_BABY) {
+			return 5;
+		}
+
+		return 0;
+	}
+
+//		==========================================================================
 	// 연령에 따른 티켓 가격 함수
 	public int calcPriceProcess(int age, int ticketSelect) {
 		int calcPrice = 0;
@@ -150,8 +168,8 @@ public class CalculateClass {
 	public void saveOrderList(int dayOrNight, int age, int buyHowManyTickets, int totalPrice, int benefitNumber,
 			String date) {
 
-		OrderListClass orderList = new OrderListClass(saveDayOrNight(dayOrNight), saveAdultOrChild(age),
-				buyHowManyTickets, totalPrice, saveBenefitNumber(benefitNumber), date);
+		OrderListClass orderList = new OrderListClass(dayOrNight, age, buyHowManyTickets, totalPrice, benefitNumber,
+				date);
 
 		orderClassList.add(orderList);
 	};

@@ -1,12 +1,6 @@
-package EuiYeobLand;
+package EuiYeobLandLocale;
 
 public class TextClass {
-
-	public void startChooseLanguage() {
-		System.out.println("========================= Choose Country Language ==========================");
-		System.out.println("1. 한국어");
-		System.out.println("2. English");
-	}
 
 	public void keepBuyTicket() {
 		System.out.println(TanslateClass.KEEP_BUY_TICKET);
@@ -74,17 +68,71 @@ public class TextClass {
 		System.out.println(TanslateClass.PRINT_WELCOME_LAND);
 	}
 
+	public void _dayTicket() {
+		System.out.print(TanslateClass.dayTicket);
+	}
+
+	public void _nightTicket() {
+		System.out.print(TanslateClass.nightTicket);
+	}
+
+	public void printAdult() {
+		System.out.print(TanslateClass.adult);
+	}
+
+	public void printTeen() {
+		System.out.print(TanslateClass.teen);
+	}
+
+	public void printKid() {
+		System.out.print(TanslateClass.kid);
+	}
+
+	public void printOldman() {
+		System.out.print(TanslateClass.oldman);
+	}
+
+	public void printBaby() {
+		System.out.print(TanslateClass.baby);
+	}
+
+	public void forNone() {
+		System.out.println(TanslateClass.forNone);
+	}
+
+	public void forDisabled() {
+		System.out.println(TanslateClass.forDisabled);
+	}
+
+	public void forMerities() {
+		System.out.println(TanslateClass.forMerities);
+	}
+
+	public void forMultiChild() {
+		System.out.println(TanslateClass.forMultiChild);
+	}
+
+	public void forPregnant() {
+		System.out.println(TanslateClass.forPregnant);
+	}
+
+	public void chooseLan() {
+		System.out.println("Choose your language");
+		System.out.println("1. 한국어");
+		System.out.println("2. English");
+	}
+
 	public void printEuiYeobLandReport() {
-		System.out.println(TanslateClass.PRINT_WELCOME_LAND_REPORT);
-		System.out.println(TanslateClass.PRINT_WELCOME_LAND_REPORT_KINDS);
+		System.out.println("================================ 의엽랜드 보고서 ===============================");
+		System.out.println("날짜\t\t권종\t연령구분\t수량\t가격\t\t우대사항");
 	}
 
 	public void printEuiYeobLandTicketSell() {
-		System.out.println(TanslateClass.PRINT_EUIYEOB_LAND_TICKET_SELL);
+		System.out.println("================================권종별 판매 현항================================");
 	}
 
 	public void printEuiYeobLandBenifitTicketStatus() {
-		System.out.println(TanslateClass.PRINT_EUIYEOB_LAND_BENIFIT_TICKET_STATUS);
+		System.out.println("==============================우대권 판매 현황==================================");
 	}
 
 	public void printendLine() {
@@ -92,67 +140,67 @@ public class TextClass {
 	}
 
 	public void ticketDayTotalBuy() {
-		System.out.print(TanslateClass.TICKET_DAY_TOTAL_BUY);
+		System.out.print("주간권 총 티켓 구매수 : ");
 	}
 
 	public void ticketNightTotalBuy() {
-		System.out.print(TanslateClass.TICKET_DAY_NIGHT_TOTAL_BUY);
+		System.out.print("야간권 총 티켓 구매수 : ");
 	}
 
 	public void ticketDayNightTotalBuy() {
-		System.out.print(TanslateClass.TICKET_DAY_NIGHT_TOTAL_BUY);
+		System.out.print("총 판매 티켓수\t\t:\t\t");
 	}
 
 	public void _me() {
-		System.out.println(TanslateClass.TICKETS);
+		System.out.println("\t매");
 	}
 
 	public void _baby() {
-		System.out.print(TanslateClass.BABY);
+		System.out.print("유아 : ");
 	}
 
 	public void _Kid() {
-		System.out.print(TanslateClass.KID);
+		System.out.print(" 어린이 : ");
 	}
 
 	public void _teen() {
-		System.out.print(TanslateClass.TEEN);
+		System.out.print(" 청소년 : ");
 	}
 
 	public void _adult() {
-		System.out.print(TanslateClass.ADULT);
+		System.out.print(" 어른 : ");
 	}
 
 	public void _oldman() {
-		System.out.print(TanslateClass.OLDMAN);
+		System.out.print(" 노인 : ");
 	}
 
 	public void dayTotalPrice() {
-		System.out.print(TanslateClass.DAY_TOTAL_PRICE);
+		System.out.print("주간권 총 매출 : ");
 	}
 
 	public void nightTotalPrice() {
-		System.out.print(TanslateClass.NIGHT_TOTAL_PRICE);
+		System.out.print("야간권 총 매출 : ");
 	}
 
 	public void nonBenifit() {
-		System.out.print(TanslateClass.NON_BENIFIT);
+		System.out.print("우 대   없 음\t\t:\t\t");
 	}
 
 	public void disableBenifit() {
-		System.out.print(TanslateClass.DISABLE_BENIFIT);
+		System.out.print("장애인 우대사항\t\t:\t\t");
 	}
 
 	public void meritBenifit() {
-		System.out.print(TanslateClass.MERIT_BENIFIT);
+		System.out.print("유공자 우대사항\t\t:\t\t");
 	}
 
 	public void manyChildBenifit() {
-		System.out.print(TanslateClass.MANYCHILD_BENIFIT);
+		System.out.print("다자녀 우대사항\t\t:\t\t");
 	}
 
 	public void pregnantBenifit() {
-		System.out.print(TanslateClass.PREGNANT_BENIFIT);
+		System.out.print("임산부 우대사항\t\t:\t\t");
 	}
 
 }

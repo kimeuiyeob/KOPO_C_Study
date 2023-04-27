@@ -1,4 +1,4 @@
-package EuiYeobLand;
+package EuiYeobLandLocale;
 
 import java.util.Scanner;
 
@@ -12,21 +12,10 @@ public class InputClass {
 		tc = new TextClass();
 	}
 
-//	=======================================================
 	public int chooseLanguage() {
-		int chooseNum;
-		while (true) {
-			tc.startChooseLanguage();
-			chooseNum = sc.nextInt();
-			if (chooseNum > 2) {
-				System.err.println("다시 시도해주세요.");
-				System.err.println("Try Again");
-				continue;
-			}
-			break;
-		}
-
-		return chooseNum;
+		tc.chooseLan();
+		int number = sc.nextInt();
+		return number;
 	}
 
 //	=======================================================

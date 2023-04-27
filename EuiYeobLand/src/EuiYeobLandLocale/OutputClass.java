@@ -1,4 +1,4 @@
-package EuiYeobLand;
+package EuiYeobLandLocale;
 
 import java.text.DecimalFormat;
 
@@ -15,8 +15,7 @@ public class OutputClass extends Thread {
 	}
 
 	// 티켓 구매 종료 출력
-	public void printResult(int number) throws InterruptedException {
-
+	public void printResult() throws InterruptedException {
 		OrderListSaveClass orderListSaveClass = new OrderListSaveClass();
 		int resultPriceSum = 0;
 		sc.printByeBye();
@@ -35,75 +34,58 @@ public class OutputClass extends Thread {
 
 			// ======================================================================================================
 			// 출력
-			if (number == 1) {
-				for (int i = 0; i < cal.getOrderClassList().size(); i++) {
-					System.out.print(cal.getOrderClassList().get(i).getDayOrNight() + "\t");
-					System.out.print(cal.getOrderClassList().get(i).getAdultOrChild() + "\t");
-					System.out.print(cal.getOrderClassList().get(i).getHowManyTickets() + "\t");
-					System.out.print(df.format(cal.getOrderClassList().get(i).getTotalPrice()));
-					sc.printWon();
-					System.out.println("\t\t" + cal.getOrderClassList().get(i).getBenefitNumber());
-					resultPriceSum += cal.getOrderClassList().get(i).getTotalPrice();
+			for (int i = 0; i < cal.getOrderClassList().size(); i++) {
+
+				if (cal.getOrderClassList().get(i).getDayOrNight() == 1) {
+					sc._dayTicket();
+				} else if (cal.getOrderClassList().get(i).getDayOrNight() == 2) {
+					sc._nightTicket();
 				}
 
-			} else if (number == 2) {
-
-				for (int i = 0; i < cal.getOrderClassList().size(); i++) {
-
-					if (cal.getOrderClassList().get(i).getDayOrNight().equals("주간권")) {
-						System.out.print("Day Tickets\t");
-					} else if (cal.getOrderClassList().get(i).getDayOrNight().equals("야간권")) {
-						System.out.print("Night Tickets\t");
-					}
-
-					if (cal.getOrderClassList().get(i).getAdultOrChild().equals("어른")) {
-						System.out.print("Adult\t");
-					} else if (cal.getOrderClassList().get(i).getAdultOrChild().equals("청소년")) {
-						System.out.print("Teen\t");
-					} else if (cal.getOrderClassList().get(i).getAdultOrChild().equals("어린이")) {
-						System.out.print("Kid\t");
-					} else if (cal.getOrderClassList().get(i).getAdultOrChild().equals("노인")) {
-						System.out.print("Oldman\t");
-					} else if (cal.getOrderClassList().get(i).getAdultOrChild().equals("아이")) {
-						System.out.print("Baby\t");
-					}
-
-					System.out.print(cal.getOrderClassList().get(i).getHowManyTickets() + "\t");
-					System.out.print(df.format(cal.getOrderClassList().get(i).getTotalPrice()));
-					sc.printWon();
-
-					if (cal.getOrderClassList().get(i).getBenefitNumber().equals("우대 사항 없음")) {
-						System.out.println("\tNo preferential treatment");
-					} else if (cal.getOrderClassList().get(i).getBenefitNumber().equals("장애인 우대사항 적용")) {
-						System.out.println("\tPreference for the disabled");
-					} else if (cal.getOrderClassList().get(i).getBenefitNumber().equals("유공자 우대사항 적용")) {
-						System.out.println("\tPreference for meritorious");
-					} else if (cal.getOrderClassList().get(i).getBenefitNumber().equals("다자녀 우대사항 적용")) {
-						System.out.println("\tPreference for multiple children");
-					} else if (cal.getOrderClassList().get(i).getBenefitNumber().equals("임산부 우대사항 적용")) {
-						System.out.println("\tPreference for pregnant women");
-					}
-
-					resultPriceSum += cal.getOrderClassList().get(i).getTotalPrice();
+				if (cal.getOrderClassList().get(i).getAdultOrChild() == 1) {
+					sc.printAdult();
+				} else if (cal.getOrderClassList().get(i).getAdultOrChild() == 2) {
+					sc.printTeen();
+				} else if (cal.getOrderClassList().get(i).getAdultOrChild() == 3) {
+					sc.printKid();
+				} else if (cal.getOrderClassList().get(i).getAdultOrChild() == 4) {
+					sc.printOldman();
+				} else if (cal.getOrderClassList().get(i).getAdultOrChild() == 5) {
+					sc.printBaby();
 				}
 
-			}
-			sc.printTotalPrice1();
-			System.out.print(df.format(resultPriceSum));
-			sc.printTotalPrice2();
+				System.out.print(cal.getOrderClassList().get(i).getHowManyTickets() + "\t");
+				System.out.print(df.format(cal.getOrderClassList().get(i).getTotalPrice()));
+				sc.printWon();
 
-			// CSV저장
-			orderListSaveClass.orderListSaving();
-			// ======================================================================================================
+				if (cal.getOrderClassList().get(i).getBenefitNumber() == 1) {
+					sc.forNone();
+				} else if (cal.getOrderClassList().get(i).getBenefitNumber() == 2) {
+					sc.forDisabled();
+				} else if (cal.getOrderClassList().get(i).getBenefitNumber() == 3) {
+					sc.forMerities();
+				} else if (cal.getOrderClassList().get(i).getBenefitNumber() == 4) {
+					sc.forMultiChild();
+				} else if (cal.getOrderClassList().get(i).getBenefitNumber() == 5) {
+					sc.forPregnant();
+				}
 
-			for (int i = 0; i < 76; i++) {
-				Thread.sleep(5);
-				System.err.print("=");
+				resultPriceSum += cal.getOrderClassList().get(i).getTotalPrice();
 			}
-			System.out.println();
-			System.out.println();
 		}
+		sc.printTotalPrice1();
+		System.out.print(df.format(resultPriceSum));
+		sc.printTotalPrice2();
 
+		// CSV저장
+		orderListSaveClass.orderListSaving();
+		// ======================================================================================================
+
+		for (int i = 0; i < 76; i++) {
+			Thread.sleep(5);
+			System.err.print("=");
+		}
+		System.out.println();
 	}
 
 	// 헤더 출력

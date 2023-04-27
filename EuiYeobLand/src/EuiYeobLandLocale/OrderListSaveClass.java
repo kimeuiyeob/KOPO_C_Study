@@ -1,4 +1,4 @@
-package EuiYeobLand;
+package EuiYeobLandLocale;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -38,14 +38,44 @@ public class OrderListSaveClass {
 		try {
 			bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, true), "MS949"));
 			for (int i = 0; i < cal.getOrderClassList().size(); i++) {
+
 				bw.write(cal.getOrderClassList().get(i).getDate() + ",");
-				bw.write(cal.getOrderClassList().get(i).getDayOrNight() + ",");
-				bw.write(cal.getOrderClassList().get(i).getAdultOrChild() + ",");
+
+				if (cal.getOrderClassList().get(i).getDayOrNight() == 1) {
+					bw.write("주간권,");
+				} else if (cal.getOrderClassList().get(i).getDayOrNight() == 2) {
+					bw.write("야간권,");
+				}
+
+				if (cal.getOrderClassList().get(i).getAdultOrChild() == 1) {
+					bw.write("어른,");
+				} else if (cal.getOrderClassList().get(i).getAdultOrChild() == 2) {
+					bw.write("청소년,");
+				} else if (cal.getOrderClassList().get(i).getAdultOrChild() == 3) {
+					bw.write("어린이,");
+				} else if (cal.getOrderClassList().get(i).getAdultOrChild() == 4) {
+					bw.write("노인,");
+				} else if (cal.getOrderClassList().get(i).getAdultOrChild() == 5) {
+					bw.write("아이,");
+				}
+
 				bw.write(cal.getOrderClassList().get(i).getHowManyTickets() + ",");
 				bw.write(cal.getOrderClassList().get(i).getTotalPrice() + ",");
-				bw.write(cal.getOrderClassList().get(i).getBenefitNumber());
+
+				if (cal.getOrderClassList().get(i).getBenefitNumber() == 1) {
+					bw.write("없음,");
+				} else if (cal.getOrderClassList().get(i).getBenefitNumber() == 2) {
+					bw.write("장애인 우대사항 적용,");
+				} else if (cal.getOrderClassList().get(i).getBenefitNumber() == 3) {
+					bw.write("유공자 우대사항 적용,");
+				} else if (cal.getOrderClassList().get(i).getBenefitNumber() == 4) {
+					bw.write("다자녀 우대사항 적용,");
+				} else if (cal.getOrderClassList().get(i).getBenefitNumber() == 5) {
+					bw.write("임산부 우대사항 적용,");
+				}
 				bw.newLine();
 			}
+
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -90,6 +120,5 @@ public class OrderListSaveClass {
 			}
 		}
 
-		
 	}
 }

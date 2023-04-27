@@ -12,6 +12,12 @@ public class InputClass {
 		tc = new TextClass();
 	}
 
+	public int chooseLanguage() {
+		tc.chooseLan();
+		int number = sc.nextInt();
+		return number;
+	}
+
 //	=======================================================
 	// 계속 티켓 구매
 	public int keepBuyTicket() {

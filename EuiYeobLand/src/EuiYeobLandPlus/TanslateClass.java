@@ -2,8 +2,15 @@ package EuiYeobLandPlus;
 
 public class TanslateClass {
 
-	private static int LANGUAGE = 2;
+	private static int LANGUAGE;
 
+	public static int getLANGUAGE() {
+		return LANGUAGE;
+	}
+
+	public static void setLANGUAGE(int lANGUAGE) {
+		LANGUAGE = lANGUAGE;
+	}
 //	==========================================================================
 
 	public static String KEEP_BUY_TICKET;
@@ -42,9 +49,11 @@ public class TanslateClass {
 	public static String forMultiChild;
 	public static String forPregnant;
 
-	public static void translateMSG(String country) {
+//	public static void translateMSG(String country) {
+	public static void translateMSG() {
 
-		if (country.equals("KR")) {
+//		if (country.equals("KR")) {
+		if (LANGUAGE == 1) {
 
 			KEEP_BUY_TICKET = "계속 발권 진행 하시겠습니까?";
 			KEEP_BUY_TICKET_GOING = "1. 진행";
@@ -82,7 +91,8 @@ public class TanslateClass {
 			forMultiChild = "\t 다자녀 우대사항 적용";
 			forPregnant = "\t 임산부 우대사항 적용";
 
-		} else if (country.equals("US")) {
+//		} else if (country.equals("US")) {
+		} else if (LANGUAGE == 2) {
 
 			KEEP_BUY_TICKET = "Would you like to proceed with ticketing?";
 			KEEP_BUY_TICKET_GOING = "1. Progress";

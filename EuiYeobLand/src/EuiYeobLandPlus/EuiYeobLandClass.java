@@ -1,6 +1,6 @@
 package EuiYeobLandPlus;
 
-import java.util.Locale;
+import java.util.Scanner;
 
 //티켓 구매 프로그램 클래스
 public class EuiYeobLandClass {
@@ -23,8 +23,12 @@ public class EuiYeobLandClass {
 	// 티켓 구매 메서드
 	public void startBuyTickets() {
 
-		Locale currentLocale = Locale.getDefault();
-		tanslateClass.translateMSG(currentLocale.getCountry());
+//		Locale currentLocale = Locale.getDefault();
+//		tanslateClass.translateMSG(currentLocale.getCountry());
+
+		int number = inputClass.chooseLanguage();
+		tanslateClass.setLANGUAGE(number);
+		tanslateClass.translateMSG();
 
 		try {
 			outputClass.printHeadLineTop(); // 헤더 출력
