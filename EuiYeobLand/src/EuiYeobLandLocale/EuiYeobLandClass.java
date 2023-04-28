@@ -17,19 +17,28 @@ public class EuiYeobLandClass {
 		tanslateClass = new TanslateClass();
 	}
 
+	//첫 시작 메서드
+	public void startingticket() {
+		int number = inputClass.GoGOstartTicketing();
+		if (number == 1) {
+			// 티켓 구매 시작
+			startBuyTickets();
+		} else if (number == 2) {
+			// CSV리포트 보기
+			showCSVReport();
+		}
+	}
+
 	// 티켓 구매 메서드
 	public void startBuyTickets() {
-
-		tanslateClass.translateMSG();
-		
-
+		tanslateClass.translateMSG(); // 번역 메서드 실행
 		try {
 			outputClass.printHeadLineTop(); // 헤더 출력
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-
 		while (true) {
+
 			// 티켓 구매 실행
 			int dayOrNight = inputClass.ticketDayorNight(); // 주간권1 / 야간권2
 			String[] residentNumber = inputClass.inputResidentNumber(); // 주민등록번호
@@ -52,11 +61,16 @@ public class EuiYeobLandClass {
 				break;
 			}
 		}
+	}
 
-		// CSV 관련
+	//CSV 관련
+	public void showCSVReport() {
+		
 		orderListSaveClass.orderListReading(); // CSV 읽어와서 저장
 		outputClass.getTotalCSVReport(); // 전체 출력
 		outputClass.getDayOrNightTotalTickets(); // 주간,야간 권종별 판매현황
 		outputClass.getReportBenifitStatus(); // 총 우대별 구매티켓 개수
+		outputClass.getDateSellingPriceStatus();//일자별 매출 현황
+
 	}
 }

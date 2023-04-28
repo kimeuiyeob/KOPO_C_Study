@@ -19,6 +19,22 @@ public class InputClass {
 	}
 
 //	=======================================================
+	// 1번 구매시작, 2번 CSV 분석파일
+	public int GoGOstartTicketing() {
+		int number = 0;
+		while (true) {
+			tc.startTicketing();
+			number = sc.nextInt();
+			if (number > 2) {
+				System.err.println("다시 선택해주세요.");
+				continue;
+			}
+			break;
+		}
+		return number;
+	}
+
+//	=======================================================
 	// 계속 티켓 구매
 	public int keepBuyTicket() {
 		int keeyBuyOrNot;

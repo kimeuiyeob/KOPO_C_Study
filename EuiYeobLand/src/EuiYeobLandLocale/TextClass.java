@@ -1,6 +1,12 @@
 package EuiYeobLandLocale;
 
 public class TextClass {
+	
+	public void startTicketing() {
+		System.out.println("티켓 진행을 도와드리겠습니다.");
+		System.out.println("1.티켓 구매를 원하십니까?");
+		System.out.println("2.티켓 매출 분석표를 원하십니까?");
+	}
 
 	public void keepBuyTicket() {
 		System.out.println(TanslateClass.KEEP_BUY_TICKET);
@@ -137,6 +143,10 @@ public class TextClass {
 
 	public void printendLine() {
 		System.out.println("============================================================================");
+	}
+	
+	public void printOneDayPriceStatus() {
+		System.out.println("==============================일자별 매출 현황==================================");
 	}
 
 	public void ticketDayTotalBuy() {

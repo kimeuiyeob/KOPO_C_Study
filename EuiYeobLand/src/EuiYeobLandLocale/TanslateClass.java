@@ -4,7 +4,7 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class TanslateClass {
-
+	
 //	==========================================================================
 
 	public static String KEEP_BUY_TICKET;
@@ -47,8 +47,9 @@ public class TanslateClass {
 
 	void translateMSG() {
 
-		Locale locale = Locale.getDefault();
-		ResourceBundle messages = ResourceBundle.getBundle("MessagesBundle", locale);
+//		Locale locale = Locale.getDefault();
+		Locale localeKor = Locale.KOREA;
+		ResourceBundle messages = ResourceBundle.getBundle("MessagesBundle", localeKor);
 		
 		KEEP_BUY_TICKET = messages.getString("KEEP_BUY_TICKET");
 		KEEP_BUY_TICKET_GOING = messages.getString("KEEP_BUY_TICKET_GOING");
@@ -88,7 +89,8 @@ public class TanslateClass {
 	}
 }
 
-//
+//==========================================================================
+
 //		if (country.equals("KR")) {
 //
 //			KEEP_BUY_TICKET = "계속 발권 진행 하시겠습니까?";

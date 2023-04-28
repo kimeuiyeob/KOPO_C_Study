@@ -1,6 +1,8 @@
 package EuiYeobLandLocale;
 
 import java.text.DecimalFormat;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class OutputClass extends Thread {
 
@@ -120,6 +122,7 @@ public class OutputClass extends Thread {
 			System.out.println();
 		}
 		sc.printendLine();
+		System.out.println();
 	}
 
 //	===================================================================================
@@ -128,8 +131,10 @@ public class OutputClass extends Thread {
 		sc.printEuiYeobLandTicketSell();
 		getReportDayTickets();// 주간 티켓 구매율
 		System.out.println();
+		System.out.println();
 		getReportNightTickets(); // 야간 티켓 구매율
 		sc.printendLine();
+		System.out.println();
 	}
 
 //	===================================================================================
@@ -287,30 +292,51 @@ public class OutputClass extends Thread {
 		sc.ticketDayNightTotalBuy();
 		System.out.print(totalBenifitstatus);
 		sc._me();
-
 		sc.nonBenifit();
 		System.out.print(numberOne);
 		sc._me();
-
 		sc.disableBenifit();
 		System.out.print(numberTwo);
 		sc._me();
-
 		sc.meritBenifit();
 		System.out.print(numberThree);
 		sc._me();
-
 		sc.manyChildBenifit();
 		System.out.print(numberFour);
 		sc._me();
-
 		sc.pregnantBenifit();
 		System.out.print(numberFive);
 		sc._me();
-
 		sc.printendLine();
+		System.out.println();
 	}
-
+	
 //	===================================================================================
 
+	public void getDateSellingPriceStatus() {
+		
+		OrderListSaveClass orderListSaveClass = new OrderListSaveClass();
+		Map<String, Integer> datePrice = new LinkedHashMap<>();
+		
+		for (int i = 0; i < orderListSaveClass.getCsvList().size(); i++) {
+			int price = Integer.valueOf(orderListSaveClass.getCsvList().get(i).get(4));
+			datePrice.put(orderListSaveClass.getCsvList().get(i).get(0),
+					datePrice.getOrDefault(orderListSaveClass.getCsvList().get(i).get(0), 0) + price);
+		}
+		
+		sc.printOneDayPriceStatus();
+		
+		for (Map.Entry<String, Integer> dayAndprice : datePrice.entrySet()) {
+			String Allday = dayAndprice.getKey();
+			String year = Allday.substring(0, 5);
+			String month = Allday.substring(4, 6);
+			String day = Allday.substring(6, 8);
+			System.out.println(
+					year + "년 \t" + month + "월\t" + day + "일\t : \t총매출\t" + df.format(dayAndprice.getValue()) + "원");
+		}
+		
+		sc.printendLine();
+		
+//		===================================================================================
+	}
 }
