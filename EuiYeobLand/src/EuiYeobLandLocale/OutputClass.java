@@ -2,6 +2,7 @@ package EuiYeobLandLocale;
 
 import java.text.DecimalFormat;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class OutputClass extends Thread {
@@ -9,18 +10,22 @@ public class OutputClass extends Thread {
 	private CalculateClass cal;
 	private DecimalFormat df;
 	private TextClass sc;
+	private JDBCconnector jdbc;
 
 	public OutputClass() {
 		cal = new CalculateClass();
 		df = new DecimalFormat("###,###,###");
 		sc = new TextClass();
+		jdbc = new JDBCconnector();
 	}
 
 	// 티켓 구매 종료 출력
 	public void printResult() throws InterruptedException {
+		
 		OrderListSaveClass orderListSaveClass = new OrderListSaveClass();
 		int resultPriceSum = 0;
 		sc.printByeBye();
+		
 		if (cal.getOrderClassList().size() >= 1) {
 			for (int i = 0; i < 76; i++) {
 				Thread.sleep(5);
@@ -81,6 +86,9 @@ public class OutputClass extends Thread {
 
 		// CSV저장
 		orderListSaveClass.orderListSaving();
+		// Mysql 저장
+		jdbc.writeToDB(cal.getOrderClassList());
+		
 		// ======================================================================================================
 
 		for (int i = 0; i < 76; i++) {
